@@ -16,10 +16,23 @@ Detects nearby APs running WEP/TKIP (deprecated encryption) or WPS.
 
 */
 
-#include "../modules/executils.h"
 #include <string>
 #include <vector>
 #include <sstream>
+
+std::string execCommand(const std::string& cmd) {
+    std::array<char, 128> buffer;
+    std::string result;
+
+    FILE* pipe = popen(cmd.c_str(), "r");
+    if (!pipe) return "ERROR";
+
+    while (fgets(buffer.data(), buffer.size(), pipe) != nullptr) {
+        result += buffer.data();
+    }
+    pclose(pipe);
+    return result;
+}
 
 std::vector<std::string> wifiCommands = {"ip link", "iwconfig", "nmcli device status"};
 
