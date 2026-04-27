@@ -59,20 +59,6 @@ nmcli reports security type in its `SECURITY` column without requiring raw scan 
 g++ wirelessinfo.cpp -o wirelessinfo -std=c++20
 ```
 
-**As part of the main ShadowHarvester build:**
-```bash
-make
-```
-
-## API
-
-When integrated into the main binary, functions are exported via `wirelessinfo.h`:
-
-| Function | Description |
-|---|---|
-| `wifiScan()` | Runs basic interface enumeration commands, returns raw output lines |
-| `runWirelessInfo()` | Runs all three phases (enumeration, weak AP scan, PSK harvest) and returns combined results |
-
 ## Example Output
 
 ```
