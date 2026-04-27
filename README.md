@@ -56,7 +56,7 @@ nmcli reports security type in its `SECURITY` column without requiring raw scan 
 
 **Standalone:**
 ```bash
-g++ wirelessinfo.cpp ../modules/executils.cpp -o wirelessinfo -std=c++20
+g++ wirelessinfo.cpp -o wirelessinfo -std=c++20
 ```
 
 **As part of the main ShadowHarvester build:**
