@@ -176,3 +176,17 @@ std::vector<std::string> runWirelessInfo() {
 
     return output;
 }
+
+int main() {
+    std::vector<std::string> wirelessResults = runWirelessInfo();
+    for (const auto& entry : wirelessResults) {
+        if (entry.find("[WEP]") != std::string::npos ||
+            entry.find("[TKIP]") != std::string::npos ||
+            entry.find("[WPS]") != std::string::npos) {
+            std::cout << YELLOW << entry << RESET << "\n";
+        } else {
+            std::cout << entry << "\n";
+        }
+    }
+    return 0;
+}
