@@ -1,6 +1,6 @@
 /*
 
-Wireless Information
+WifiReap
 
 Author: c0d3Ninja
 Website: https://gotr00t0day.github.io
@@ -23,7 +23,6 @@ Detects nearby APs running WEP/TKIP (deprecated encryption) or WPS.
 
 std::vector<std::string> wifiCommands = {"ip link", "iwconfig", "nmcli device status"};
 
-// Returns the first wireless interface name found via `iw dev`
 static std::string detectWifiInterface() {
     std::string output = execCommand("iw dev 2>/dev/null");
     std::istringstream ss(output);
@@ -55,7 +54,6 @@ std::vector<std::string> wifiScan() {
     return cmdResults;
 }
 
-// Reads saved WiFi profiles — may expose PSKs in plaintext
 static std::vector<std::string> savedNetworkCreds() {
     std::vector<std::string> results;
 
@@ -134,7 +132,6 @@ static std::vector<APInfo> parseAPFlags(const std::string& scanOutput) {
 static std::vector<std::string> scanWeakAPs(const std::string& iface) {
     std::string raw = execCommand("iw dev " + iface + " scan 2>/dev/null");
     if (raw.empty() || raw == "ERROR") {
-        // Fall back to nmcli if iw scan fails (e.g. NetworkManager is managing the iface)
         raw = execCommand("nmcli -t -f BSSID,SSID,SECURITY dev wifi list 2>/dev/null");
         std::vector<std::string> findings;
         std::istringstream ss(raw);
